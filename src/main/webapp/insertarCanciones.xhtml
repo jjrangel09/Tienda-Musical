@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="templates/header_1.xhtml">
+
+    <ui:param name="tituloPagina" value="Insertar Canciones"></ui:param>
+    <ui:param name="nombrePagina" value="Insertar Canciones"></ui:param>
+    <ui:define name="contenido">
+        <div class="container white" style="margin-top:90px; margin-bottom: 90px;">
+            <h5>Diligencie los datos para continuar</h5>
+            <hr></hr>
+            <h:form id="form">
+                <p:growl id="growl" life="2000" />
+                <h6>Datos de la cancion:</h6>
+               
+                <span class="ui-float-label">
+                    <p:inputText id="nombre" value="#{cancionService.nombre}" />
+                    <p:outputLabel for="@previous" value="Nombre" />
+                </span>
+               
+                <span class="ui-float-label">
+                    <p:inputText id="duracion" value="#{cancionService.duracion}" />
+                    <p:outputLabel for="@previous" value="Duracion" />
+                </span>
+                
+                <span class="ui-float-label">
+                    <p:inputText id="disco" value="#{cancionService.disco}" />
+                    <p:outputLabel for="@previous" value="Disco" />
+                </span>
+                
+                <span class="ui-float-label">
+                    <p:inputText id="nombreA" value="#{cancionService.nombreArtista}" />
+                    <p:outputLabel for="@previous" value="Artista" />
+                </span>
+                
+                <span class="ui-float-label">
+                    <p:inputText id="formato" value="#{cancionService.formato}" />
+                    <p:outputLabel for="@previous" value="Formato" />
+                </span>
+                
+                <h6>Precio</h6>
+                <p:inputNumber id="precio" value="#{cancionService.precio}">
+                </p:inputNumber>
+                <p:commandButton value="Guardar" id="withIcon" actionListener="#{cancionService.crearCancion()}" update="growl" style="margin-right:20px;" icon="pi pi-save" />
+            </h:form>
+        </div>
+    </ui:define>
+    <ui:param name="nombrePiePagina" value="Tienda de musica: inicio"></ui:param>
+</ui:composition>

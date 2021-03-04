@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="templates/header_1.xhtml">
+
+    <ui:param name="tituloPagina" value="Pagina de inicio"></ui:param>
+    <ui:param name="nombrePagina" value="inicio"></ui:param>
+    <ui:define name="contenido">
+        <body class="blue darken-1">
+            <div class="container blue darken-1" style="margin-top:90px;">
+                <div class="row">
+                    <div class="col s12 m6 offset-m3">
+                        <div class="card-panel z-depth-5">
+                            <h4 class="center"> Login Administrador</h4>	 
+                            <div class="row">
+                                <form class="col s12 m12">
+                                    <div class="row">
+                                        <div class="input-field col s12 m12">
+                                            <i class="mdi-communication-email prefix"></i>
+                                            <input id="icon_email" type="email" class="validate"/>
+                                            <label for="icon_email">Email</label>
+                                        </div>
+                                        <div class="input-field col s12 m12">
+                                            <i class="fa fa-unlock-alt prefix"></i>
+                                            <input id="icon_password" type="password" class="validate"/>
+                                            <label for="icon_password">Contraseña</label>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <a href="index.xhtml" id="download-button" class="btn-large waves-effect waves-light orange">Ingresar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+            <script type="text/javascript" src="js/materialize.min.js"></script>
+            <script>
+                (function (i, s, o, g, r, a, m) {
+                    i['GoogleAnalyticsObject'] = r;
+                    i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date();
+                    a = s.createElement(o),
+                            m = s.getElementsByTagName(o)[0];
+                    a.async = 1;
+                    a.src = g;
+                    m.parentNode.insertBefore(a, m)
+                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+                ga('create', 'UA-60673008-2', 'auto');
+                ga('send', 'pageview');
+            </script>
+        </body>
+    </ui:define>
+</ui:composition>

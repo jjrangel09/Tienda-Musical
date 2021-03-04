@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="templates/header_1.xhtml">
+
+    <ui:param name="tituloPagina" value="Pagina de inicio"></ui:param>
+    <ui:param name="nombrePagina" value="inicio"></ui:param>
+    <ui:define name="contenido">
+        <div class="container blue darken-1" style="margin-top:90px;">
+        <h:form id="form">
+            <p:growl id="msgs" showDetail="true"/>
+            <p:dataTable id="canciones" var="cancion" value="#{editarVista.listaCancion}" editable="true" style="margin-bottom:20px">
+                <f:facet name="header">
+                    Editar Canciones
+                </f:facet>
+
+                <p:ajax event="rowEdit" listener="#{editarVista.onRowEdit}" update=":form:msgs" />
+                <p:ajax event="rowEditCancel" listener="#{editarVista.onRowCancel}" update=":form:msgs" />
+
+                <p:column headerText="Id">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{cancion.id}" /></f:facet>
+                        <f:facet name="input"><p:inputText id="modelInput" value="#{cancion.id}" style="width:100%" label="Id"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Nombre">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{cancion.nombre}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{cancion.nombre}" style="width:100%" label="Nombre"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Duracion">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{cancion.duracion}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{cancion.duracion}" style="width:100%" label="Duracion"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Disco">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{cancion.disco}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{cancion.disco}" style="width:100%" label="Disco"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Artista">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{cancion.nombreArtista}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{cancion.nombreArtista}" style="width:100%" label="Artista"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Formato">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{cancion.formato}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{cancion.formato}" style="width:100%" label="Formato"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Precio">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{cancion.precio}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{cancion.precio}" style="width:100%" label="Precio"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+
+                <p:column style="width:40px">
+                    <p:rowEditor />
+                    <p:commandButton actionListener="#{editarVista.deleteRow(cancion)}" update=":form" icon="pi pi-times" style="margin-right:10px;" title="Eliminar" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+            </div>
+    </ui:define>
+    <ui:param name="nombrePiePagina" value="Tienda de musica: inicio"></ui:param>
+</ui:composition>

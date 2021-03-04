@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="templates/header_1.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:param name="tituloPagina" value="Pagina de inicio"></ui:param>
+    <ui:param name="nombrePagina" value="inicio"></ui:param>
+    <ui:define name="contenido">
+        <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
+        <h1 class="center">Lista de Canciones</h1>
+        <div class="container blue darken-1" style="margin-top:90px; margin-bottom: 90px;">
+            <h:form id="form">
+                <p:dataGrid var="cancion" value="#{editarVista.listaCancion}" columns="3" layout="grid"
+                            rows="12" paginator="true" id="cars"
+                            paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                            >
+
+                    <f:facet name="header">
+                        Canciones
+                    </f:facet>
+
+                    <p:panel header="#{cancion.id}" style="text-align:center">
+                        <h:panelGrid columns="1" style="width:100%">
+                            <h:graphicImage library="images" name="portada.jpg" width="250" height="250"/>
+
+                            <h:outputText value="#{cancion.nombreArtista}"/>
+
+                            <p:commandLink update=":form:cancionDetail" oncomplete="PF('cancionDialog').show()" title="Ver Detalles  ">
+
+                                <h:outputText styleClass="pi pi-search" style="margin:0 auto;"/>
+
+                                <f:setPropertyActionListener value="#{cancion}" target="#{editarVista.cancionSelecionada}" />
+                            </p:commandLink>
+                        </h:panelGrid>
+                    </p:panel>
+                </p:dataGrid>
+
+                <p:dialog header="Detalles de la cancion" widgetVar="cancionDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                    <p:outputPanel id="cancionDetail" style="text-align:center;">
+                        <p:panelGrid  columns="2" rendered="#{not empty editarVista.cancionSelecionada}" columnClasses="label,value">
+                            <f:facet name="header">
+                                <h:graphicImage library="images" name="portada.jpg" width="250" height="250"/>
+                            </f:facet>
+
+                            <h:outputText value="Nombre:" />
+                            <h:outputText value="#{editarVista.cancionSelecionada.nombre}" />
+
+                            <h:outputText value="Disco:" />
+                            <h:outputText value="#{editarVista.cancionSelecionada.disco}" />
+
+                            <h:outputText value="Duaracion:" />
+                            <h:outputText value="#{editarVista.cancionSelecionada.duracion}"/>
+
+                            <h:outputText value="Precio:" />
+                            <h:outputText value="$#{editarVista.cancionSelecionada.precio}" />
+                            <h:outputText value="Comprar:" />
+                            <h:form> 
+                            <p:commandButton value="Comprar" action="#{editarVista.comprarCancion(cancion)}" update="message">
+                                <p:confirm header="Confirmacion" message="Está seguro?" icon="pi pi-exclamation-triangle" />
+                            </p:commandButton>
+                                
+                                <p:growl id="message" showDetail="true" />
+                                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+                                </p:confirmDialog>
+                            </h:form>
+                        </p:panelGrid>
+                    </p:outputPanel>
+                </p:dialog>
+            </h:form>
+        </div>
+    </ui:define>
+    <ui:param name="nombrePiePagina" value="Tienda de musica: inicio"></ui:param>
+</ui:composition>
